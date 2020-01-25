@@ -1,0 +1,32 @@
+package: main
+name: app
+columns:
+  -
+    name: app_id
+    type: bigint
+    comment: 是用来标记你的开发者账号的, 是你的用户id, 这个id 在数据库添加检索, 方便快速查找
+    option:
+      autoincrement: true
+      length: 10
+  -
+    name: name
+    type: string
+    comment: 服务名称
+    option:
+      length: 255
+      notnull: false
+  -
+     name: ctime
+     type: integer
+  -
+     name: mtime
+     type: integer
+indexes:
+  -
+    unique: false
+    comment: 查询
+    columns:
+      - app_id
+pk:
+  - app_id
+comment: |## 应用表 密钥授权

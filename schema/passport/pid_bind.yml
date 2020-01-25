@@ -1,0 +1,56 @@
+package: user
+name: pid_bind
+schema_ext:
+    idx: 0 - 9
+    link: _
+columns:
+ -
+    name: id
+    type: bigint
+    comment: 自增id
+    option:
+      autoincrement: true
+ -
+    name: pid
+    type: string
+    comment: 用户平台账户id
+    option:
+      length: 100
+ -
+    name: uuid
+    type: bigint
+    comment: hm账号id
+    option:
+      length: 20
+ -
+    name: ptype
+    type: integer
+    comment: 平台类型 0:幻萌 1: google 2: facebook 3:
+    option:
+      length: 5
+      default: 0
+      notnull: false
+ -
+    name: bind_status
+    type: integer
+    comment: 第三方绑定状态 0:和hm临时账号绑定 1: 和幻萌账号绑定
+    option:
+      length: 5
+      default: 0
+      notnull: false
+ -
+    name: ctime
+    type: integer
+ -
+    name: mtime
+    type: integer
+indexes:
+  -
+    comment: 第三方平台id 索引
+    columns:
+      - pid
+      - ptype
+pk:
+  - id
+comment: |
+  ## 账号绑定表 平台id绑定到hmid是都是临时账号

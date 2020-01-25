@@ -1,0 +1,47 @@
+package: hforum
+name: topic_back
+schema_ext:
+    idx: 0 - 2
+columns:
+  -
+    name: id
+    type: bigint
+    comment: 回帖id
+    option:
+      length: 20
+      autoincrement: true
+  -
+    name: topic_id
+    type: bigint
+    comment: 帖子id
+    option:
+      length: 20
+  -
+    name: pid
+    type: bigint
+    comment: 回帖父id
+    option:
+      length: 20
+  -
+     name: uuid
+     type: bigint
+     comment: 用户id
+     option:
+       length: 20
+  -
+     name: content
+     type: string
+     comment: 回帖内容
+  -
+    name: ctime
+    type: integer
+  -
+    name: mtime
+    type: integer
+indexes:
+  -
+    columns:
+      - topic_id
+
+pk:
+  - id

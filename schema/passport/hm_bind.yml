@@ -1,0 +1,43 @@
+package: user
+name: hm_bind
+schema_ext:
+    idx: 0 - 9
+    link: _
+columns:
+ -
+    name: uuid
+    type: bigint
+    comment: 用户平台账户id 主账号 hmid 或者被第三方直接绑定的
+    option:
+      length: 20
+ -
+    name: pid
+    type: string
+    comment: 绑定的平台账号
+    option:
+      length: 100
+ -
+    name: ptype
+    type: integer
+    comment: 平台类型 0:幻萌 1: google 2: facebook 3:
+    option:
+        length: 5
+        default: 0
+        notnull: false
+ -
+    name: ctime
+    type: integer
+ -
+    name: mtime
+    type: integer
+indexes:
+  -
+    comment: 第三方平台id 索引
+    columns:
+      - uuid
+      - ptype
+
+pk:
+  - uuid
+comment: |
+  ## 账号绑定表hmid 绑定的第三方账号  保争被hm账号绑定的第三方账号 hm用户也能登陆

@@ -1,0 +1,107 @@
+<?php
+
+class schema{
+
+}
+
+class userDao implements  schema
+{
+
+    //example 1
+    /**
+     * @return mixed
+     * @fields
+     * @where  uuid = :uuid
+     * @
+     */
+    function getUser()
+    {
+//        $sql = 'select * from __TABLE_NAME',
+
+
+        return $this->find( $sql );
+    }
+
+    /**
+     * 用注解来配置sql
+     * @where uuid = :uuid
+     */
+    function update()
+    {
+
+        return $this->find();
+
+    }
+    const BEFOR = 'befor';
+    const AFTER = 'after';
+    function __construct()
+    {
+//        $this->attachEvent(self::BEFOR,)
+//            $this->attachEvent(self::AFTER,)
+    }
+
+    public function attachEvent($name,$handle){
+        $this->_e[$name] = $handle;
+    }
+
+    public function raiseEvent($name){
+        call_user_func($this->_e[$name]);
+    }
+
+
+    public function raiseBeforEvent()
+    {
+        $this->raiseEvent( 'befor' );
+    }
+    public function raiseAfterEvent()
+    {
+        $this->raiseEvent( 'after' );
+    }
+    /**
+     * @desc find by uuid  use query build
+     *
+     */
+    function findByuuid( $uuid )
+    {
+        $this->befor();
+
+
+        $this->eq( 'uuid', $uuid);
+
+        $this->after();
+
+//        return $this->exec();
+//        return $this->find();
+
+    }
+}
+
+// 前置执行分析
+//后执行查询
+
+//$x =new userDao();
+//$x->findByuuid(34);
+
+
+
+
+
+
+
+}
+
+//
+//class dao{
+//
+//
+//    function getStatment()
+//    {
+////        if(instanceof(schema))
+//        {
+//            $ref = new flection();
+//            $doc = 'aa';
+//
+//        }
+//
+//    }
+//}

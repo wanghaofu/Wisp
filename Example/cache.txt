@@ -1,0 +1,192 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: tony
+ * Date: 16/7/27
+ * Time: 14:30
+ */### cache 系统说明
+
+##为了提高系统的承载能力 主要从两个方面着手
+#1:数据库的可扩展
+/**
+包括 db扩展 分库
+    表扩展 分表
+
+    这个功能已经提供 ， 在算法相同情况下目前可以进行连表查询
+
+#2: cache 系统
+    cache 主要对 db 层持久层提取出来的数据进行cache 有一个命中率 以及脏数据的问题，也就是cache的数据在更新后即时清理掉
+    活着更新的问题
+
+cache 方案
+
+    基于行的cache
+
+    * 1对cache 针对查询条件 返回主键值列表， 然后根据主键值列表， 获取cache
+     的内容，如果存在则返回，不存在则根据主键入数据库查询
+
+
+      这种方案，不可取 原因是 查询获取主键信息的效率不高 ，在非索引情况下 要进行大量扫描，
+        就是针对查询的条件都进行索这个 方案就可行，
+        （可行性前提，需要索引查询条件
+            有大量的索引区查询
+        ）
+
+
+
+    2: db cache 的 基于where形式的索引
+
+        where 分析
+
+        包涵  非包含  自动刷新的条件
+
+        包涵性：
+            凡事牵扯到当前行更新的 cache 都需要 清除cache
+
+            这个必须根据查询条件进行 人工区分
+
+            针对单表
+
+                w1 结果
+                与
+                w2 结果
+
+            相同的查询条件  不同的查询参数
+
+            清除条件
+
+                包涵状态 和相等状态 必须清除 子集的所有cache
+
+
+                虚拟设计
+ *
+ ***/
+
+//auto cache
+
+//                if prop
+
+                where['userAllProps'] ="uuid = :uuid";
+                        'type'= ‘mutil’;
+
+                where['userProp'] = 'propId = : uuid';
+                        'type' = 'sign';
+
+
+
+
+
+
+                // query
+
+                 function getAllUserProp($uuid)
+                 {
+                        $this->getAllUserProp($uuid);
+                 }
+
+
+//这三个对cache的影响
+                // update
+                    //uuid = 3
+
+               $user->execute('userProp',['status'=> 1,'propId'=>23])
+
+
+                    //effect
+                        userAllProps,  userProp   uuid=>3
+                        userProp  propId =23
+
+
+                        uuid > prop
+
+                    操作
+                        清理 以这两个条件 和 这个参数的cache
+
+                // delete
+                      where: userProp   propId= 23
+
+                      effect
+                        userAllProps,  userProp   uuid=>3
+                        userProp  propId =23
+
+
+                // insert
+
+                         userAllProps,  userProp   uuid=>3
+
+                $res = $user->find('UserAllProps',['uuid'=>uuid]);
+
+                $user->cache(); //缓存刚才返回的结果  //自动化配置
+
+
+
+
+
+class Acache{
+        const RES_TYPE_MUTIL = 'mutil';
+        const RES_TYPE_SINGLE = "single";
+
+        static var $fieldDep = ['user.uuid>prop.propid'];
+
+
+      //如果更新了子集 则自动更新包涵大一级 外键的 该外外键值对应的多行cache 值
+        //明确声明
+
+       stait var $where =[
+            'ByUuid' =>
+                        ['where'=>'uuid = :uuid',
+                         'effect'=>''
+                         ],
+            'propid' => ['where'=>'propid = :propId',
+                         'effect'=>'ByUuid'   //数据更新时候影响到的缓存  uuid必须包含
+                         ]
+
+];
+
+    /**
+     *
+     *
+     *  uuid = 23
+     *
+     *  propId = 12
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     */
+
+
+    function getUserProp()
+    {
+        $this->find('uuid',$this->uuid);
+    }
+
+
+    function getUserPropByPropId($propId)
+    {
+        $this->find('propId',$propId);
+    }
+
+
+    function updatePropId()
+    {
+        $this->exec('propId',['status'=>1,'propId'=>2]);
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+

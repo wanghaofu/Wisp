@@ -1,0 +1,33 @@
+package: hforum
+name: topic_cat
+columns:
+  -
+    name: id
+    type: integer
+    option:
+      length: 10
+      autoincrement: true
+  -
+    name: pid
+    type: integer
+    option:
+      length: 10
+  -
+    name: title
+    type: string
+    comment: 分类名称
+    option:
+      length: 255
+  -
+    name: description
+    type: string
+    comment: 说明
+    option:
+      lenght: 255
+  -
+    name: img
+    type: string
+    option:
+      lenght: 255
+pk:
+  - id

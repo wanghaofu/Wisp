@@ -1,0 +1,32 @@
+{
+	"name": "king/wisp",
+	"description":"framework ext lib",
+	"license" : "wangtao",
+	"keywords":["php framework ext lib db cache etc"],
+	"version": "1.0.0",
+	"authors":[
+		{
+			"name":"wangtao",
+			"email":"wanghaofu@163.com"
+			}
+	],
+	"bin": ["bin/korm.php"],
+	"require":{
+	  "php":">=5.3.0",
+	  "symfony/cache": "v3.1.5",
+	  "symfony/yaml": "~2.6",
+	  "symfony/console": "~2.6",
+	  "doctrine/dbal": "~2.5"
+	},
+	"require-dev":{
+
+	},
+	"autoload":{
+	  	"files": ["src/System/functions.php"],
+		"psr-4":{
+			"Wisp\\": "src/"
+			}
+	}
+}
+	
+	

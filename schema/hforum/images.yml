@@ -1,0 +1,48 @@
+package: hforum
+name: images
+schema_ext:
+    idx: 0 - 2
+columns:
+  -
+    name: image_id
+    type: bigint
+    comment: 图片id
+    option:
+      length: 20
+      autoincrement: true
+  -
+    name: url
+    type: string
+    option:
+      length: 255
+  -
+    name: name
+    type: string
+    option:
+      length: 255
+  -
+    name: uuid
+    type: bigint
+    comment: 用户id
+    option:
+      length: 20
+  -
+    name: topic_id
+    type: bigint
+    comment: 帖子id
+    option:
+      length: 20
+  -
+    name: ctime
+    type: integer
+  -
+    name: mtime
+    type: integer
+indexes:
+  -
+    columns:
+      - uuid
+      - topic_id
+
+pk:
+  - image_id

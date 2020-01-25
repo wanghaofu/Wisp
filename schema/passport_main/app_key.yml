@@ -1,0 +1,45 @@
+package: main
+name: app_key
+columns:
+  -
+    name: id
+    type: bigint
+    comment: 自增id
+    option:
+      autoincrement: true
+  -
+    name: app_id
+    type: string
+    comment: app 分配的id
+    option:
+      default: 0
+      length: 20
+  -
+    name: app_key
+    type: string
+    comment: app_key 和 app_secret 是一对出现的账号, 同一个 app_id 可以对应多个 app_key+app_secret, 这样 平台就可以分配你不一样的权限
+    option:
+      length: 32
+      notnull: false
+  -
+    name: app_secret
+    type: string
+    comment: 服务链接密钥
+    option:
+      length: 32
+      notnull: false
+  -
+    name: ctime
+    type: integer
+  -
+    name: mtime
+    type: integer
+indexes:
+  -
+    unique: false
+    comment: 查询
+    columns:
+      - app_id
+pk:
+  - id
+comment: |## 应用表 密钥授权app_key + app_secret 这种成对出现的机制因为 要加密, 通常在首次验证(类似登录场景),你需要用 app_key(标记要申请的权限有哪些)+app_secret(密码, 表示你真的拥有这个权限)来申请一个token,就是我们经常用到的 access_token

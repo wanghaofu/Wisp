@@ -1,0 +1,24 @@
+package: hforum
+name: topic_ext
+schema_ext:
+    idx: 0 - 2
+columns:
+  -
+    name: topic_id
+    type: bigint
+    comment: 帖子id
+    option:
+      length: 20
+  -
+    name: content
+    type: string
+    comment: 帖子内容
+  -
+    name: ctime
+    type: integer
+  -
+    name: mtime
+    type: integer
+
+pk:
+  - topic_id

@@ -1,5 +1,5 @@
 {
-	"name": "tofish/wisp",
+	"name": "wisp/wisp",
 	"description":"framework ext lib",
 	"license" : "MIT",
 	"keywords":["php framework ext lib db cache etc"],

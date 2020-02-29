@@ -1,5 +1,5 @@
 {
-	"name": "wisp/wisp",
+	"name": "king/wisp",
 	"description":"framework ext lib",
 	"license" : "MIT",
 	"keywords":["php framework ext lib db cache etc"],
@@ -15,7 +15,7 @@
 	  "php":">=5.3.0",
 	  "symfony/cache": "v3.1.5",
 	  "symfony/yaml": "~2.6",
-	  "symfony/console": "~2.6",
+	  "symfony/console": "~2.8.9",
 	  "doctrine/dbal": "~2.5"
 	},
 	"require-dev":{

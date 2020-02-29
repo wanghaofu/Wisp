@@ -1,4 +1,4 @@
-<?php namespace King\Orm\Dev;
+<?php namespace Wisp\Orm\Dev;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\DBAL\Schema\Table;

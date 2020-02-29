@@ -1,4 +1,4 @@
-<?php namespace King\Orm\Dev;
+<?php namespace Wisp\Orm\Dev;
 
 use Symfony\Component\Console\Application;
 

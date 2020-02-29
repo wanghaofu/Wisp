@@ -1,9 +1,9 @@
-<?php namespace King\Orm\Dev\Commands;
+<?php namespace Wisp\Orm\Dev\Commands;
 
 use Doctrine\Common\Inflector\Inflector;
 use Doctrine\DBAL\Types\Type;
-use King\Orm\Dev\SchemaTool;
-use King\Orm\Dev\SimpleTemplate;
+use Wisp\Orm\Dev\SchemaTool;
+use Wisp\Orm\Dev\SimpleTemplate;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;

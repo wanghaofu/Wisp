@@ -1,4 +1,4 @@
-<?php namespace King\Orm\Dev\Commands;
+<?php namespace Wisp\Orm\Dev\Commands;
 
 
 /**
@@ -14,7 +14,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 use King\Core\CoreFactory;
-use King\Orm\Dev\SchemaTool;
+use Wisp\Orm\Dev\SchemaTool;
 
 use Wisp\Factory\DbDefaultFactory\DbFactory;
 use Wisp\Factory\DbDefaultFactory\DbSharding;

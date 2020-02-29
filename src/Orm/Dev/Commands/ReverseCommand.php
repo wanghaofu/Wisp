@@ -1,8 +1,8 @@
-<?php namespace King\Orm\Dev\Commands;
+<?php namespace Wisp\Orm\Dev\Commands;
 
 use Doctrine\DBAL\DriverManager;
 use King\Core\CoreFactory;
-use King\Orm\Dev\SchemaTool;
+use Wisp\Orm\Dev\SchemaTool;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

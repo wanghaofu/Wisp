@@ -1,7 +1,7 @@
-<?php namespace King\Orm\Dev;
+<?php namespace Wisp\Orm\Dev;
 
-use Common\Dependency\Dependency;
-use Common\Dependency\Derived\FrozenKeyValue;
+use King\Core\Common\Dependency\Dependency;
+use King\Core\Common\Dependency\Derived\FrozenKeyValue;
 use Doctrine\DBAL\Driver\PDOConnection;
 
 /**

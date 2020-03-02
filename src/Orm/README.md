@@ -481,4 +481,11 @@ return [$joinedList->getPager(), $joinedList->fetch(1)];
   ]
 ]
 ```
-
+### 主表和分表的配置形式   
+schema_ext:
+    idx:  - 9
+    link: _
+ ####会生成如下形式的表结构
+* CREATE TABLE oid_discount (coorid point NOT NULL COMMENT '坐标id', oil_name VARCHAR(255) NOT NULL COMMENT '油站名称', uuid BIGINT NOT NULL, ctime INT NOT NULL, mtime INT NOT NULL, INDEX idx_j1tdj3 (uuid), PRIMARY KEY(coorid)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB;
+----
+* CREATE TABLE oid_discount_1 (coorid point NOT NULL COMMENT '坐标id', oil_name VARCHAR(255) NOT NULL COMMENT '油站名称', uuid BIGINT NOT NULL, ctime INT NOT NULL, mtime INT NOT NULL, INDEX idx_j1tdj3 (uuid), PRIMARY KEY(coorid)) DEFAULT CHARACTER SET utf8 COLLATE `utf8_unicode_ci` ENGINE = InnoDB;

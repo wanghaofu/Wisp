@@ -1,16 +1,13 @@
-package: oid_discount
-name: oid_discount
+package: oil_discount
+name: oil_discount
 schema_ext:
-    idx: -
+    idx:  -
     link: _
 columns:
   -
-    name: coorid
-    type: bigint
+    name: cooridnate
+    type: point
     comment: 坐标id
-    option:
-      length: 20
-      autoincrement: true
   -
     name: oil_name
     type: string
@@ -34,6 +31,6 @@ indexes:
       - uuid
 
 pk:
-  - coorid
+  - cooridnate
 comment: |
   ## 加油站

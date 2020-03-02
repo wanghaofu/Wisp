@@ -44,16 +44,28 @@ class SchemaCommand extends Command
     protected function configure()
     {
         parent::configure();
-        $this
-            ->setName( 'schema' )
-            ->setDescription( 'generate/run schema sql ' )
-            ->addArgument( self::MODE, InputArgument::OPTIONAL, 'drop|create|migrate|migrate_from|create_db|drop_db', self::MODE_CREATE )
-            ->addArgument( self::TARGET, InputArgument::OPTIONAL, '<target>', '' )
-            ->addOption( self::OPTION_EXEC, null, null, '直接执行' )
-            ->addOption( self::OPTION_TABLE, null, InputOption::VALUE_REQUIRED, '表名' )
+        if(true == defined("DEFAULT_DB_NAME")){
+            $this
+                ->setName('schema')
+                ->setDescription('generate/run schema sql ')
+                ->addArgument(self::MODE, InputArgument::OPTIONAL, 'drop|create|migrate|migrate_from|create_db|drop_db', self::MODE_CREATE)
+                ->addArgument(self::TARGET, InputArgument::OPTIONAL, '<target>', '')
+                ->addOption(self::OPTION_EXEC, null, null, '直接执行')
+                ->addOption(self::OPTION_TABLE, null, InputOption::VALUE_REQUIRED, '表名')
 //            ->addOption( self::OPTION_DB, null, InputOption::VALUE_REQUIRED, '库名', 'passport' ); //添加db名称选项
 //        $this ->addOption( self::OPTION_DB, null, InputOption::VALUE_REQUIRED, '库名',  $dbKeyName ); //添加db名称选项
-           ->addOption(self::OPTION_DB,null,InputOption::VALUE_REQUIRED);
+                ->addOption(self::OPTION_DB, null, InputOption::VALUE_REQUIRED, '库名', DEFAULT_DB_NAME); //添加db名称选项
+        }else{
+            $this
+                ->setName('schema')
+                ->setDescription('generate/run schema sql ')
+                ->addArgument(self::MODE, InputArgument::OPTIONAL, 'drop|create|migrate|migrate_from|create_db|drop_db', self::MODE_CREATE)
+                ->addArgument(self::TARGET, InputArgument::OPTIONAL, '<target>', '')
+                ->addOption(self::OPTION_EXEC, null, null, '直接执行')
+                ->addOption(self::OPTION_TABLE, null, InputOption::VALUE_REQUIRED, '表名')
+                ->addOption(self::OPTION_DB, null, InputOption::VALUE_REQUIRED); //添加db名称选项
+        }
+
     }
 
 
@@ -68,6 +80,7 @@ class SchemaCommand extends Command
          *
          */
         $dbKeyName = $input->getOption( self::OPTION_DB );
+        de($dbKeyName);
         CoreFactory::instance();
 //集群名称
 
@@ -130,8 +143,8 @@ class SchemaCommand extends Command
          * @link http://doctrine-orm.readthedocs.org/en/latest/cookbook/mysql-enums.html
          */
         $connection->getDatabasePlatform()->registerDoctrineTypeMapping( 'enum', 'string' );
-
-//
+        $connection->getDatabasePlatform()->registerDoctrineTypeMapping( 'point', 'point' );
+        $connection->getDatabasePlatform()->registerDoctrineTypeMapping( 'geometry', 'geometry' );
 //        $schema = $connection->getSchemaManager()->createSchema();
 //        var_dump($schema->toSql($connection->getDatabasePlatform()));
 //        return;
@@ -198,8 +211,6 @@ class SchemaCommand extends Command
 
     protected function getSchema( InputInterface $input, $dbKeyName = '' )
     {
-
-
         $file = $input->getOption( self::OPTION_TABLE );
         $dir= dirname(dirname(dirname(dirname(__DIR__)))) .'/schema';
         if ( empty( $file ) ) {

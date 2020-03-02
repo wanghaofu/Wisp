@@ -40,8 +40,10 @@ class SchemaTool
             list( $idxMin, $idxMax ) = explode( '-', $idxStr );
             $idxMin = trim($idxMin);
             $idxMax = trim($idxMax);
-            for( $idx=$idxMin;$idx<= $idxMax;$idx++){
-                $r[ 'nameExt' ] = sprintf( '%s_%s', $r[ 'name' ], $idx );
+            for( $idx=$idxMin;$idx<= $idxMax;$idx++) {
+                if ( "" !==  $idx) {
+                    $r['nameExt'] = sprintf('%s_%s', $r['name'], $idx);
+               }
                 self::_createTableFromFile( $r, $schema );
             }
         } else {

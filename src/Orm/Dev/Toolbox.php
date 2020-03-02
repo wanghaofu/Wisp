@@ -2,7 +2,11 @@
 
 use Symfony\Component\Console\Application;
 
+use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAL\Platforms\AbstractPlatform;
 
+Type::addType('geometry', 'Wisp\Orm\Types\GeometryType');
+Type::addType('point', 'Wisp\Orm\Types\PointType');
 class Toolbox extends Application
 {
     public function __construct($name = 'KingOrm Toolbox', $version = 'dev')

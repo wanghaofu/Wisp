@@ -1,7 +1,7 @@
 ## 命令参数
 drop|create|migrate|migrate_from|create_db|drop_db
 
-### example
+### example 1 无默认情况下失效  目前已经不建议实用
 * php ./korm.php schema create_db   创建数据库 预览
 * php ./korm.php  schema create_db -exec   创建数据库 执行
 

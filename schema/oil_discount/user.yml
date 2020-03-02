@@ -1,0 +1,39 @@
+package: oid_discount
+name: oid_discount
+schema_ext:
+    idx: -
+    link: _
+columns:
+  -
+    name: coorid
+    type: bigint
+    comment: 坐标id
+    option:
+      length: 20
+      autoincrement: true
+  -
+    name: oil_name
+    type: string
+    comment: 油站名称
+    option:
+      length: 255
+  -
+    name: uuid
+    type: bigint
+    option:
+      length: 20
+  -
+    name: ctime
+    type: integer
+  -
+    name: mtime
+    type: integer
+indexes:
+  -
+    columns:
+      - uuid
+
+pk:
+  - coorid
+comment: |
+  ## 加油站

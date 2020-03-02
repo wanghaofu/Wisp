@@ -52,14 +52,13 @@ class SchemaCommand extends Command
             ->addOption( self::OPTION_EXEC, null, null, '直接执行' )
             ->addOption( self::OPTION_TABLE, null, InputOption::VALUE_REQUIRED, '表名' )
 //            ->addOption( self::OPTION_DB, null, InputOption::VALUE_REQUIRED, '库名', 'passport' ); //添加db名称选项
-            ->addOption( self::OPTION_DB, null, InputOption::VALUE_REQUIRED, '库名', 'passport' ); //添加db名称选项
+//        $this ->addOption( self::OPTION_DB, null, InputOption::VALUE_REQUIRED, '库名',  $dbKeyName ); //添加db名称选项
+           ->addOption(self::OPTION_DB,null,InputOption::VALUE_REQUIRED);
     }
 
 
     protected function execute( InputInterface $input, OutputInterface $output )
     {
-
-
 //        $pdo = CoreFactory::instance()->pdo(); //这里返回的是连接对象！pdo连接对象
         /**
          *  core 能够取到连接配置
@@ -68,9 +67,9 @@ class SchemaCommand extends Command
          *
          *
          */
+        $dbKeyName = $input->getOption( self::OPTION_DB );
         CoreFactory::instance();
 //集群名称
-        $dbKeyName = $input->getOption( self::OPTION_DB );
 
         $dbGroupExtArr = DbSharding::getDbIdxArr( $dbKeyName );
         $groupNum = count( $dbGroupExtArr );
@@ -202,26 +201,28 @@ class SchemaCommand extends Command
 
 
         $file = $input->getOption( self::OPTION_TABLE );
+        $dir= dirname(dirname(dirname(dirname(__DIR__)))) .'/schema';
         if ( empty( $file ) ) {
 
-            $dir = __DIR__ . '/../../../schema';
+//            $dir = __DIR__ . '../../../../schema';
+
             $dir = $dbKeyName ? $dir . '/' . $dbKeyName : $dir;
+
             $schema = SchemaTool::createSchemaFromDir( $dir );
         } else {
 
             if ( $dbKeyName ) {
-                $format = "%s/../../../schema/{$dbKeyName}%s.yml";
+                $format = "{$dir}/{$dbKeyName}%s.yml";
             } else {
-                $format = "%s/../../../schema/%s.yml";
+                $format = "{$dir}/schema/%s.yml";
             }
 
-            $file = sprintf( $format, __DIR__, $file );
+            $file = sprintf( $format,  $file );
             if ( !is_file( $file ) ) {
                 throw new \InvalidArgumentException( 'cannot find: ' . $file );
             }
             $schema = SchemaTool::createTableFromFile( $file );
         }
-
         return $schema;
     }
 }

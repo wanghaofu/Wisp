@@ -1,11 +1,11 @@
 <?php
 namespace Wisp\DAO\OilDiscount;
-use Wisp\Db\QueryBuild\IModel;
+use Wisp\Db\DAO;
 /**
 * @description 
 **/
-class OilDiscount extends IModel {
-   var $cooridnate; // 坐标id 
+class OilDiscount extends DAO {
+   var $coordinate; // 坐标id 
    var $oil_station_name; // 油站名称 
    var $uuid;
    var $ctime;
@@ -18,7 +18,7 @@ class OilDiscount extends IModel {
    var $latitude; // 维度 
    var $start_time;
    var $end_time;
-   const F_COORIDNATE = 'cooridnate'; // 坐标id 
+   const F_COORDINATE = 'coordinate'; // 坐标id 
    const F_OIL_STATION_NAME = 'oil_station_name'; // 油站名称 
    const F_UUID = 'uuid'; 
    const F_CTIME = 'ctime'; 
@@ -31,10 +31,11 @@ class OilDiscount extends IModel {
    const F_LATITUDE = 'latitude'; // 维度 
    const F_START_TIME = 'start_time'; 
    const F_END_TIME = 'end_time'; 
-   static $fields=['cooridnate', 'oil_station_name', 'uuid', 'ctime', 'mtime', 'id', 'jiu_er', 'jiu_wu', 'chayou', 'longitude', 'latitude', 'start_time', 'end_time'];
-   function __construct($data=null,$dbName=null){
+   static $fields=['coordinate', 'oil_station_name', 'uuid', 'ctime', 'mtime', 'id', 'jiu_er', 'jiu_wu', 'chayou', 'longitude', 'latitude', 'start_time', 'end_time'];
+   function __construct($dbName=null){
      $this->__schemaName = 'oil_discount';
      $this->__tableName = 'oil_discount';
+     parent::__construct($dbName);
      $this->__primaryKey = 'id'; //    
 }
 }

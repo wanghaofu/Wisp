@@ -185,11 +185,12 @@ class {$tableClassName} extends DAO {
 
 
                     //build con
-                    $var = ( $fieldObj->comment ) ? "   var \${$fieldObj->fieldName}; // {$fieldObj->comment} \n" : "   var \${$fieldObj->fieldName};\n";
+                    $var = ( trim($fieldObj->comment) != "" ) ? "   var \${$fieldObj->fieldName}; // {$fieldObj->comment} \n" : "   var \${$fieldObj->fieldName};\n";
                     $tableCon[ 'var' ][] = $var;
                     $constName = generatorConstName( "f_{$fieldObj->fieldName}" );
 
-                    $tableCon[ 'const' ][] = "   const {$constName} = '{$fieldObj->fieldName}'; // {$fieldObj->comment} \n";
+                    $const =  ( trim($fieldObj->comment) != "" ) ?  "   const {$constName} = '{$fieldObj->fieldName}'; // {$fieldObj->comment} \n" :  "   const {$constName} = '{$fieldObj->fieldName}'; \n";
+                    $tableCon[ 'const' ][] =$const;
                     if ( !empty( $fieldObj->pri ) && $fieldObj->pri === 'PRI' ) {
                         $tableCon[ 'pk' ] = "     \$this->__primaryKey = '{$fieldObj->fieldName}'; // {$fieldObj->comment}   \n";
                     }
@@ -201,7 +202,7 @@ class {$tableClassName} extends DAO {
                 //生成schema 类内容
                 $tableClassCon = generatorTableClass( $tableCon );
 
-                de( $tableClassCon );
+
                 $fileName = WispConfig::getGeneratorPath() . "/DAO/{$schemaClassName}/{$tableClassName}.php";
 
                 writeFile( $fileName, $tableClassCon );

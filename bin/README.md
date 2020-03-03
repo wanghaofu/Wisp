@@ -30,7 +30,9 @@ php ./korm.php schema create  --exec
 
 #从数据库生成数据模型
 * 配置wisp 默认数据库 连接数据
-* 修改 GeneratorDomainModel 的数据库名
-* 执行  php ./GeneratorDomainDaoModel.php 即可生成
+* 修改 GeneratorDomainDao 的数据库名
+* 执行  php ./GeneratorDomainDao.php 即可生成  
+* 说明 dao是最新的版本支持的功能更多
+
 
  

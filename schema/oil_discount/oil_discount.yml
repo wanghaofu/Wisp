@@ -11,7 +11,7 @@ columns:
        length: 20
        autoincrement: true
   -
-    name: cooridnate
+    name: coordinate
     type: point
     comment: 坐标id
     option:

@@ -40,10 +40,9 @@ class GeneratorDomainDao
         {
             WispConfig::setGeneratorPath( $gp );
         }
-        $dbName = 'hforum';
+        $dbName = 'oil_discount';
 //$dbName = 'ship_basic';
         $db = Sys::db( $dbName );
-
         $daoInfos = [ ];
 
 // $sql = "show create table {$table}";
@@ -71,8 +70,9 @@ class GeneratorDomainDao
     )";
 
 
-        $databases = $db->getRows( $sqlSchema );
 
+        $databases = $db->getRows( $sqlSchema );
+       de($databases);
         $schema_cons = [ ];
 
         foreach ( $databases as $key => $value ) {
@@ -111,6 +111,7 @@ class {$schemaClassName}
     AND table_name NOT LIKE 'tmp#_%' ESCAPE '#'";
 
             $tables = $db->getRows( $sql );
+            de($tables);
             //table
             $storeTableClassName = [ ];
             foreach ( $tables as $key => $table ) {
@@ -448,5 +449,4 @@ class FieldInfo
     VAR $type = null;
     var $pri = null;
 }
-
 GeneratorDomainDao::run();

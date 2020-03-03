@@ -15,61 +15,16 @@ $dbconfig = [ ];
 //    'charset'  => 'utf8'
 //];
 
-
-
-// #may be like this
-$dbConfig[ 'ship_basic' ] = [
+$dbConfig[ 'oil_discount' ] = [
     'master' => [
-        'dsn'      => 'mysql:host=192.168.1.157;port=3306;',
-        'user'     => 'passport',
-        'password' => 'passport',
-        'database' => 'ship_basic',
+        'dsn'      => 'mysql:host=localhost;port=3306;',
+        'user'     => 'oildiscount',
+        'password' => '20200302',
+        'database' => 'oil_discount',
         'charset'  => 'utf8'
     ]
 ];
 
-// #may be like this
-$dbConfig[ 'acgn' ] = [
-    'master' => [
-        'dsn'      => 'mysql:host=192.168.1.157;port=3306;',
-        'user'     => 'passport',
-        'password' => 'passport',
-        'database' => 'acgn',
-        'charset'  => 'utf8'
-    ]
-];
-
-// #may be like this
-$dbConfig[ 'hforum' ] = [
-    'master' => [
-        'dsn'      => 'mysql:host=192.168.1.157;port=3306;',
-        'user'     => 'passport',
-        'password' => 'passport',
-        'database' => 'ship_basic_ios',
-        'charset'  => 'utf8'
-    ]
-];
-// #may be like this
-$dbConfig[ 'passport_main' ] = [
-    'master' => [
-        'dsn'      => 'mysql:host=192.168.1.157;port=3306;',
-        'user'     => 'passport',
-        'password' => 'passport',
-        'database' => 'passport_main',
-        'charset'  => 'utf8'
-    ]
-];
-
-// #may be like this
-$dbConfig[ 'ship_basic_ios' ] = [
-    'master' => [
-        'dsn'      => 'mysql:host=192.168.1.157;port=3306;',
-        'user'     => 'passport',
-        'password' => 'passport',
-        'database' => 'ship_basic_ios',
-        'charset'  => 'utf8'
-    ]
-];
 // #用户 库配置
 
 // #may be like this

@@ -5,15 +5,66 @@ schema_ext:
     link: _
 columns:
   -
+    name : id
+    type : bigint
+    option :
+       length: 20
+       autoincrement: true
+  -
     name: cooridnate
     type: point
     comment: 坐标id
+    option:
+        notnull: false
   -
-    name: oil_name
+    name: oil_station_name
     type: string
     comment: 油站名称
     option:
       length: 255
+  -
+    name: jiu_er
+    type: float
+    option:
+      length: 4
+  -
+    name: jiu_wu
+    type: float
+    option:
+      default: 0
+      length: 4
+      notnull: false
+  -
+    name: chayou
+    type: float
+    option:
+      default: 0
+      length: 4
+      notnull: false
+  -
+    name: longitude
+    type: string
+    comment: 经度
+    option:
+      length: 12
+  -
+    name: latitude
+    type: string
+    comment: 维度
+    option:
+      length: 12
+  -
+    name: start_time
+    type: integer
+    option:
+      length: 10
+      notnull: false
+  -
+    name: end_time
+    type: integer
+    option:
+      length: 10
+      notnull: false
   -
     name: uuid
     type: bigint
@@ -27,10 +78,12 @@ columns:
     type: integer
 indexes:
   -
+    unique: true
     columns:
-      - uuid
+      - longitude
+      - latitude
 
 pk:
-  - cooridnate
+  - id
 comment: |
   ## 加油站

@@ -44,7 +44,7 @@ class GeneratorDomainDao
         {
             WispConfig::setGeneratorPath( $gp );
         }
-        $dbName = 'passport';
+        $dbName = 'oil_discount';
         $sh = new Sharding('','',$dbName,'');
         $dbIdxArr = $sh->getDbIdxArr();
         if(false === empty($dbIdxArr)){

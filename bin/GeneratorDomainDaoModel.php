@@ -72,7 +72,6 @@ class GeneratorDomainDao
 
 
         $databases = $db->getRows( $sqlSchema );
-       de($databases);
         $schema_cons = [ ];
 
         foreach ( $databases as $key => $value ) {
@@ -111,7 +110,7 @@ class {$schemaClassName}
     AND table_name NOT LIKE 'tmp#_%' ESCAPE '#'";
 
             $tables = $db->getRows( $sql );
-            de($tables);
+
             //table
             $storeTableClassName = [ ];
             foreach ( $tables as $key => $table ) {
@@ -170,11 +169,12 @@ class {$tableClassName} extends IModel {
 
 
                     //build con
-                    $var = ( $fieldObj->comment ) ? "   var \${$fieldObj->fieldName}; // {$fieldObj->comment} \n" : "   var \${$fieldObj->fieldName};\n";
+                    $var = ( trim($fieldObj->comment) != "" ) ? "   var \${$fieldObj->fieldName}; // {$fieldObj->comment} \n" : "   var \${$fieldObj->fieldName};\n";
                     $tableCon[ 'var' ][] = $var;
                     $constName = generatorConstName( "f_{$fieldObj->fieldName}" );
 
-                    $tableCon[ 'const' ][] = "   const {$constName} = '{$fieldObj->fieldName}'; // {$fieldObj->comment} \n";
+                    $const =  ( trim($fieldObj->comment) != "" ) ?  "   const {$constName} = '{$fieldObj->fieldName}'; // {$fieldObj->comment} \n" :  "   const {$constName} = '{$fieldObj->fieldName}'; \n";
+                    $tableCon[ 'const' ][] =$const;
                     if ( !empty( $fieldObj->pri ) && $fieldObj->pri === 'PRI' ) {
                         $tableCon[ 'pk' ] = "     \$this->__primaryKey = '{$fieldObj->fieldName}'; // {$fieldObj->comment}   \n";
                     }
@@ -186,7 +186,7 @@ class {$tableClassName} extends IModel {
                 //生成schema 类内容
                 $tableClassCon = generatorTableClass( $tableCon );
 
-                de( $tableClassCon );
+
                 $fileName = WispConfig::getGeneratorPath() . "/DAO/{$schemaClassName}/{$tableClassName}.php";
 
                 writeFile( $fileName, $tableClassCon );
@@ -194,7 +194,8 @@ class {$tableClassName} extends IModel {
 //     Util::de($tables);
             $schemaClassCon = generatorSchemaClasss( $schemaCon );
             $fileName = WispConfig::getGeneratorPath() . "/DAO/$schemaClassName.php";
-            de( $fileName );
+
+            de( "生成文件:". $fileName );
             writeFile( $fileName, $schemaClassCon );
         }
     }

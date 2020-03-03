@@ -1,3 +1,4 @@
+# 数据库管理
 ## 设置默认数据库 ./korm.php
 define("DEFAULT_DB_NAME",'oil_discount'); 
 
@@ -26,3 +27,10 @@ php ./korm.php schema create  --exec
 
 ### 更新库 结构
 * php ./korm.php schema migrate --db oil_discount  exec   
+
+#从数据库生成数据模型
+* 配置wisp 默认数据库 连接数据
+* 修改 GeneratorDomainModel 的数据库名
+* 执行  php ./GeneratorDomainDaoModel.php 即可生成
+
+ 

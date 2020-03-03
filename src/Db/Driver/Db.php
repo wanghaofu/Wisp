@@ -447,7 +447,7 @@ class Db
      *
      * 执行失败 返回false  查询结果呢statmentPdo
      */
-    public function query( $strSql, $params = null )
+    public function query( $strSql, $params = [] )
     {
         //重置pdostatment
         $this->le_result = null;
@@ -507,10 +507,6 @@ class Db
                     }
                 }
             }
-//<<<<<<< HEAD
-//            $statement->execute();
-//
-//=======
 
 
             $statement->execute();
@@ -534,32 +530,16 @@ class Db
         $errorCode = $statement->errorCode();
         $res = ( $errorCode !== '00000' ) ? false : $statement;
 
-//<<<<<<< HEAD
-//
-//        if ( $statement ) {
-//            $this->le_result = $statement;
-//        }
-//
-//        if ( true == $res ) {
-//            $this->affectedRows += intval( $statement->rowCount() ); //影响行数子集计算的！
-//        } else {
-//            $errorInfo = $statement->errorInfo();
-//            $this->log( "SQL_ERROR: $strSql ! errorMessage: " . $errorInfo[ 2 ] ); //prepare 的异常处理
-////            if( !$this->ignoreError) {
-////                throw new \Exception( ' db Execute fail' . $errorInfo[ 2 ] );  //这里执行失败必须抛出异常？ 意味着程序结束了吗？
-////            }
-//        }
 
-//=======
         if ( true == $res ) {
             $this->affectedRows += intval( $statement->rowCount() ); //影响行数子集计算的！
             $this->le_result = $statement;
         } else {
             $errorInfo = $conn->errorInfo();
+
             throw new \Exception( ' db Execute fail' . $errorInfo[ 2 ] );  //这里执行失败必须抛出异常？ 意味着程序结束了吗？
         }
 
-//>>>>>>> feature/easyBuild
         return $res;
     }
 
@@ -693,6 +673,7 @@ class Db
      */
     public function getRows( $sql )
     {
+
         $this->query( $sql );
         if ( !$this->le_result ) {
             return false;

@@ -1,8 +1,8 @@
 <?php
 namespace Wisp\Db\SQL;
-use Wisp\Db\Object;
+use Wisp\Db\BaseObject;
 use Wisp\Exception\DBException;
-class Criteria extends Object
+class Criteria extends BaseObject
 {
     // ----[ Class Constants ]----------------------------------------
     const TYPE_IS_GET = 0x01;

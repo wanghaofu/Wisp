@@ -2,7 +2,7 @@
 namespace Wisp\Db\SQL;
 
 use Wisp\Db\SQL\Criteria;
-use Wisp\Db\Object;
+use Wisp\Db\BaseObject;
 use Wisp\Db\SQL\Sharding;
 use Wisp\Factory\DbDefaultFactory\DbFactory;
 
@@ -259,7 +259,9 @@ class Statement
             if ( !is_array( $querys ) ) {
                 $querys = [ $querys ];
             }
+
             foreach ( $querys as $query ) {
+
                 $is_success = $driver->query( $query, $params );
                 if ( $is_success ) {
                     $data = $this->fetchResult();
@@ -287,21 +289,11 @@ class Statement
                         throw new DBException($driver->getErrorMsg(), $driver->errorCode());
                     }else{
                         $data = $this->fetchResult();
-//<<<<<<< HEAD
-//                        if( false === $data ){
-//                            throw new DBException($driver->getErrorMsg(), $driver->errorCode());
-//                        }
-//                        if ( is_array( $result ) && is_array( $data ) )
-//                            $result = array_merge( $result, $data );
-//                        else {
-//                            $result = $data;
-//=======
                         if (  $result  && is_numeric( $data ) )
                         {
                             $result += $data ;
                         }else{
                             $result = $data ;
-//>>>>>>> feature/easyBuild
                         }
                     }
                 }

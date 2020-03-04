@@ -447,18 +447,20 @@ class Db
      *
      * 执行失败 返回false  查询结果呢statmentPdo
      */
-    public function query( $strSql, $params = [] )
+    public function query( $strSql, $params = null )
     {
         //重置pdostatment
         $this->le_result = null;
-
         //保存查询
         $this->query = $strSql;
         ####################### 分库分表的回调操作点 ###########################
         // debug 调试
         if ( $this->debug ) {
-            Core::instance()->logger()->notice( $strSql, $params );
-        } else {
+            if ( is_null($params) ) {
+                Core::instance()->logger()->notice($strSql);
+            }else{
+                    Core::instance()->logger()->notice( $strSql, $params );
+                }
 
         }
         // 只读操作
@@ -489,35 +491,27 @@ class Db
         array_push( $this->statSql, $strSql );
         if ( count( $this->statSql ) > $this->statSqlLimit )
             array_shift( $this->statSql );
-
-
         // 开始查询 调用连接资源
         try {
-
             $statement = $conn->prepare( $strSql );
             if ( !is_null( $params ) ) {
                 foreach ( $params as $key => &$value ) {
-                    $key = (false === strpos($key,':')) ? ":" . $key : $key;
-                    $bindRes = $statement->bindValue(  $key, $value);
+
+                    $key = (false === strpos($key, ':')) ? ":" . $key : $key;
+
+//                    de($key);
+                        $bindRes = $statement->bindValue($key, $value);
 //                    $bindRes = $statement->bindParam( $key, $value);
-
-
                     if ( $bindRes === false ) {
                         $this->log( "field: {$key} value: {$value} is error" );
                     }
                 }
             }
-
-
             $statement->execute();
-
-
             if($statement->errorCode() != '00000'){
                 $errorInfo = $statement->errorInfo();
                 $this->log('SQL_ERROR:'.$strSql. ' ErrorMessage: ' .$errorInfo[2]);
             }
-//>>>>>>> feature/easyBuild
-
         } catch ( \PDOException $e ) {
             if ( $this->ignoreError ) {
                 echo( "<ERROR><div style='padding:20px;'>服务器忙，请稍后访问！</div>" );
@@ -529,8 +523,6 @@ class Db
 
         $errorCode = $statement->errorCode();
         $res = ( $errorCode !== '00000' ) ? false : $statement;
-
-
         if ( true == $res ) {
             $this->affectedRows += intval( $statement->rowCount() ); //影响行数子集计算的！
             $this->le_result = $statement;
@@ -633,9 +625,6 @@ class Db
      */
     public function exec( $sql, $commit = true )
     {
-//        if ( !$this->conn ) {
-//            $this->conn = $this->connect();
-//        }
         $this->conn();
         $this->statSql[] = $sql;
         $res = $this->conn->exec( $sql ); //!

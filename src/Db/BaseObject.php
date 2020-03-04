@@ -1,7 +1,7 @@
 <?php
 namespace Wisp\Db;
 use Wisp\Exception\WispException;
-abstract class Object
+abstract class BaseObject
 {
     // ----[ Class Constants ]----------------------------------------
     // CLASS

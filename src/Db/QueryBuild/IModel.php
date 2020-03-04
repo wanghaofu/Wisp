@@ -18,6 +18,8 @@ abstract class IModel
 
     static $fields;
 
+    var $warpField = [];
+
 //    const DB_NAME = 'test';
 //    const TABLE_NAME = '';
 //    const PRIMARY_KEY = '';
@@ -51,4 +53,18 @@ abstract class IModel
         #修改和添加 操作不支持 参数没法传入
         return cascade( new static($data) );
     }
+
+    /**
+     * 对于特殊需要mysql函数处理的数据 外边包一层函数  例如地理信息处理需要
+     * @param $fieldName
+     * @param $formatString
+     * @return $this
+     */
+    public function warpFieldData($fieldName,$formatString)
+    {
+       $this->warpField[$fieldName] = $formatString;
+        return $this;
+    }
+
+
 }

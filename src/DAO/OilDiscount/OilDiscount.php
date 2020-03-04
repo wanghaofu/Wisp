@@ -1,10 +1,10 @@
 <?php
 namespace Wisp\DAO\OilDiscount;
-use Wisp\Db\DAO;
+use Wisp\Db\QueryBuild\IModel;
 /**
 * @description 
 **/
-class OilDiscount extends DAO {
+class OilDiscount extends IModel {
    var $coordinate; // 坐标id 
    var $oil_station_name; // 油站名称 
    var $uuid;
@@ -32,10 +32,9 @@ class OilDiscount extends DAO {
    const F_START_TIME = 'start_time'; 
    const F_END_TIME = 'end_time'; 
    static $fields=['coordinate', 'oil_station_name', 'uuid', 'ctime', 'mtime', 'id', 'jiu_er', 'jiu_wu', 'chayou', 'longitude', 'latitude', 'start_time', 'end_time'];
-   function __construct($dbName=null){
+   function __construct($data=null,$dbName=null){
      $this->__schemaName = 'oil_discount';
      $this->__tableName = 'oil_discount';
-     parent::__construct($dbName);
      $this->__primaryKey = 'id'; //    
 }
 }

@@ -29,10 +29,14 @@ php ./korm.php schema create  --exec
 * php ./korm.php schema migrate --db oil_discount  exec   
 
 #从数据库生成数据模型
+* GeneratorDomainDaoModel.php0
+   1. 最新版本的php 支持两种形式 model单独分离作为数据模型， 
+   2. 数据访问model::Cascadef静态方法初始化进入后访问 延续了版本一的功能
+   3. 而模型本身作为数据实体简化
+       1. asdfasdfasd
 * 配置wisp 默认数据库 连接数据
-* 修改 GeneratorDomainDao 的数据库名
-* 执行  php ./GeneratorDomainDao.php 即可生成  
-* 说明 dao是最新的版本支持的功能更多
+   1. 修改 GeneratorDomainDao 的数据库名
+    2. 执行  php ./GeneratorDomainDao.php 即可生成  
 
 
  

@@ -43,7 +43,6 @@ class DAO extends QueryBuilder
     const SYNC_TYPE_UPDATE = 2;
     const SYNC_TYPE_DELETE = 3;
 
-
     protected $cacheSync = null;
 
 
@@ -431,12 +430,12 @@ class DAO extends QueryBuilder
 
         if ( true === is_array( $this->__content ) ) {
             foreach ( $this->__content as $field => $value ) {
-//            $key = ':v_' . count( $params ) . '_';
 //            $key = ':v_' . count( $params );
                 $key = ':' . $field;
                 $params[ $key ] = $value;
                 $this->__params[ $key ] = $value;
-                $fields[ $this->quote( $field ) ] = $key;
+//                $fields[ $this->quote( $field ) ] = $key;
+//                $fields[ $this->quote( $field ) ] = $this->warpFieldValue($field,$key);
             }
         }
 
@@ -506,22 +505,23 @@ class DAO extends QueryBuilder
 
         return $res;
     }
-
+   /**基于对象构建的参数类型 **/
     public function insert( $builder = null )
     {
         $this->_setContent( $builder );
         $params = [ ];
         $fields = [ ];
+
         if ( true === is_array( $this->__content ) ) {
             foreach ( $this->__content as $field => $value ) {
                 $key = ':v_' . count( $params );
-                $params[ $key ] = $value;
+                    $params[$key] = $value;
                 $this->__params[ $key ] = $value;
-                $fields[ $this->quote( $field ) ] = $key;
+
+                 $fields[ $this->quote( $field ) ] = $this->warpFieldValue($field,$key);
             }
         }
-
-        $sql = sprintf( 'INSERT INTO %s %s VALUES %s', $this->__df->__tableName, $this->wrap( $this->comma( array_keys( $fields ) ) ), $this->wrap( $this->comma( array_values( $fields ) ) ) );
+        $sql = sprintf('INSERT INTO %s %s VALUES %s', $this->__df->__tableName, $this->wrap($this->comma(array_keys($fields))), $this->wrap($this->comma(array_values($fields))));
         $this->setSchemaName( $this->__df->__schemaName );
         $this->setTableName( $this->__df->__tableName );
         $stmtName = md5( $sql );
@@ -529,6 +529,18 @@ class DAO extends QueryBuilder
 
         return $this->execute( $stmtName, $this->getParams(), null, $this->getShardParams(), self::SYNC_TYPE_INSERT );
     }
+
+
+    private function  warpFieldValue($field,$key)
+    {
+        $warpField = $this->__df->warpField;
+        if( $warpField[$field]){
+            $key = sprintf("$warpField[$field]",$key);
+            $fields[ $this->quote( $field ) ] = $key;
+        }
+        return $key;
+    }
+
 
     private function getTableName()
     {
@@ -559,7 +571,7 @@ class DAO extends QueryBuilder
                 $key = ':v_' . count( $params );
                 $params[ $key ] = $value;
                 $this->__params[ $key ] = $value;
-                $fields[ $this->quote( $field ) ] = $key;
+                $fields[ $this->quote( $field ) ] = $this->warpFieldValue($field,$key);
             }
         }
         $sql = sprintf( 'UPDATE %s SET ', $this->_getTableName() );
@@ -595,7 +607,6 @@ class DAO extends QueryBuilder
         // 获取成员变量的参数
         if ( true === is_array( $this->__content ) ) {
             foreach ( $this->__content as $field => $value ) {
-//            $key = ':v_' . count( $params )
                 $key = ':v_' . count( $params );
                 $params[ $key ] = $value;
                 $this->__params[ $key ] = $value;
@@ -664,7 +675,6 @@ class DAO extends QueryBuilder
 
         if ( $res ) {
             $this->clean();
-
             return $res;
         }
         $criteria = new Criteria();
@@ -884,7 +894,6 @@ class DAO extends QueryBuilder
     /**
      * @todo
      **/
-
 //    public function __call( $method, $params = null )
 //    {
 //        // 基于注释的写法
@@ -984,8 +993,6 @@ class DAO extends QueryBuilder
             }
         }
         $rcs = self::getRedisCacheService();
-
-
         if ( true == isset( $rcs ) ) {
             CacheSyncManager::setPredis( $rcs );
             $this->setPkValue( $params );

@@ -25,8 +25,6 @@ class QueryData
     protected static $pk = [ ];
 
     protected $__df;
-
-
     protected $__fields;
     protected $__table;
     protected $__where;
@@ -45,16 +43,12 @@ class QueryData
         // 'params' => [],
         // ], self::ARRAY_AS_PROPS);
     }
-
-
     // if use where then must set this params  must is an array
-
     public function setShardParam( $shardingParams )
     {
         if ( true == is_array( $shardingParams ) ) {
             $this->__shardParams = $shardingParams;
         }
-
     }
 
 
@@ -148,12 +142,7 @@ class QueryData
         return $this->whereFieldOp( $field, '<=', $value );
     }
 
-
-
-
     // ################# underline write method is read hard #############################
-
-
     // ###################### @todo base set #####################
 
     /**
@@ -386,7 +375,6 @@ class QueryData
         $key = ":$key";
         if ( true === isset( $key ) ) {
             $this->__shardParams[ $key ] = $value;
-//>>>>>>> feature/easyBuild
         }
         $this->__params[ $key ] = $value;
 

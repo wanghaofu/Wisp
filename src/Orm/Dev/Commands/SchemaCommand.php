@@ -145,6 +145,7 @@ class SchemaCommand extends Command
         $connection->getDatabasePlatform()->registerDoctrineTypeMapping( 'enum', 'string' );
         $connection->getDatabasePlatform()->registerDoctrineTypeMapping( 'point', 'point' );
         $connection->getDatabasePlatform()->registerDoctrineTypeMapping( 'geometry', 'geometry' );
+//        $connection->getDatabasePlatform()->registerDoctrineTypeMapping( 'timestamp', 'timestamp' );
 //        $schema = $connection->getSchemaManager()->createSchema();
 //        var_dump($schema->toSql($connection->getDatabasePlatform()));
 //        return;

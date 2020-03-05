@@ -35,7 +35,7 @@ columns:
       length: 4
       notnull: false
   -
-    name: chayou
+    name: chaiyou
     type: float
     option:
       default: 0

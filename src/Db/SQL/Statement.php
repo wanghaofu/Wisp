@@ -5,6 +5,7 @@ use Wisp\Db\SQL\Criteria;
 use Wisp\Db\BaseObject;
 use Wisp\Db\SQL\Sharding;
 use Wisp\Factory\DbDefaultFactory\DbFactory;
+use King\Core\Core;
 
 class Statement
 {

@@ -8,7 +8,7 @@ use Wisp\Db\QueryBuild\QueryBuilder;
 use Wisp\Db\QueryBuild\IModel;
 
 use Wisp\Db\QueryHelp\CacheSyncManager;
-
+use King\Core\Core;
 /**
  * 数据库入口facade 类文件
  * 主要的数据库访问代理 依赖系统初始化
@@ -453,8 +453,6 @@ class DAO extends QueryBuilder
 
         $this->reg( $stmtName, $sql );
         $res = $this->find( $stmtName, $params, null, null, false, $shardParams );
-
-
         return $res;
     }
 

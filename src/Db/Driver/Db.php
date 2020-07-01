@@ -453,6 +453,7 @@ class Db
         $this->le_result = null;
         //保存查询
         $this->query = $strSql;
+        Core::instance()->logger()->notice($strSql);
         ####################### 分库分表的回调操作点 ###########################
         // debug 调试
         if ( $this->debug ) {
@@ -496,9 +497,7 @@ class Db
             $statement = $conn->prepare( $strSql );
             if ( !is_null( $params ) ) {
                 foreach ( $params as $key => &$value ) {
-
                     $key = (false === strpos($key, ':')) ? ":" . $key : $key;
-
 //                    de($key);
                         $bindRes = $statement->bindValue($key, $value);
 //                    $bindRes = $statement->bindParam( $key, $value);
@@ -510,6 +509,8 @@ class Db
             $statement->execute();
             if($statement->errorCode() != '00000'){
                 $errorInfo = $statement->errorInfo();
+                Core::instance()->logger()->error('error',$errorInfo);
+//                Core::instance()->logger()->error(json_encode($statement),$errorInfo);?
                 $this->log('SQL_ERROR:'.$strSql. ' ErrorMessage: ' .$errorInfo[2]);
             }
         } catch ( \PDOException $e ) {
@@ -517,6 +518,7 @@ class Db
                 echo( "<ERROR><div style='padding:20px;'>服务器忙，请稍后访问！</div>" );
             }
             $res = false;
+            Core::instance()->logger()->error($e->getMessage());
             $this->log( "SQL_ERROR: $strSql ! errorMessage: " . $e->getMessage() ); //prepare 的异常处理
 
         }
@@ -531,7 +533,6 @@ class Db
 
             throw new \Exception( ' db Execute fail' . $errorInfo[ 2 ] );  //这里执行失败必须抛出异常？ 意味着程序结束了吗？
         }
-
         return $res;
     }
 

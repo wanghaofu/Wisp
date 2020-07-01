@@ -25,8 +25,8 @@ php ./korm.php schema create  --exec
 #### 删除库
 * php ./korm.php schema drop_db --db passport --exec  删除库
 
-### 更新库 结构
-* php ./korm.php schema migrate --db oil_discount  exec   
+### 更新库 表结构
+* php ./korm.php schema migrate --db oil_discount  --exec
 
 #从数据库生成数据模型
 * GeneratorDomainDaoModel.php0

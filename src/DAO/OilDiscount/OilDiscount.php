@@ -18,6 +18,7 @@ class OilDiscount extends IModel {
    var $latitude; // 维度 
    var $start_time;
    var $end_time;
+   var $jiu_ba;
    const F_COORDINATE = 'coordinate'; // 坐标id 
    const F_OIL_STATION_NAME = 'oil_station_name'; // 油站名称 
    const F_UUID = 'uuid'; 
@@ -31,7 +32,8 @@ class OilDiscount extends IModel {
    const F_LATITUDE = 'latitude'; // 维度 
    const F_START_TIME = 'start_time'; 
    const F_END_TIME = 'end_time'; 
-   static $fields=['coordinate', 'oil_station_name', 'uuid', 'ctime', 'mtime', 'id', 'jiu_er', 'jiu_wu', 'chai_you', 'longitude', 'latitude', 'start_time', 'end_time'];
+   const F_JIU_BA = 'jiu_ba'; 
+   static $fields=['coordinate', 'oil_station_name', 'uuid', 'ctime', 'mtime', 'id', 'jiu_er', 'jiu_wu', 'chai_you', 'longitude', 'latitude', 'start_time', 'end_time', 'jiu_ba'];
    function __construct($data=null,$dbName=null){
      $this->__schemaName = 'oil_discount';
      $this->__tableName = 'oil_discount';

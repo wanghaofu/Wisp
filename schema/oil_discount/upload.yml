@@ -1,0 +1,54 @@
+package: oil_discount
+name: upload
+schema_ext:
+    idx:  -
+    link: _
+columns:
+  -
+    name : id
+    type : bigint
+    comment: 图片id
+    option :
+       length: 20
+       autoincrement: true
+  -
+    name : oil_discount_id
+    type : bigint
+    option :
+       length: 20
+  -
+    name: url
+    type: string
+    comment: 文件路径 相对的
+    option:
+        notnull: false
+  -
+    name: uuid
+    type: bigint
+    option:
+      length: 20
+      default : 0
+  -
+    name: ctime
+    type: integer
+    comment: 创建时间
+    option:
+           length: 10
+           default : 0
+  -
+    name: mtime
+    type: integer
+    comment: 修改时间
+    option:
+          length: 10
+          default : 0
+indexes:
+  -
+    unique: false
+    columns:
+      - oil_discount_id
+
+pk:
+  - id
+comment: |
+  ## 加油站

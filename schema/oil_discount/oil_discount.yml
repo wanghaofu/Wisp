@@ -24,35 +24,42 @@ columns:
       length: 255
   -
     name: jiu_er
-    type: float
+    type: string
     option:
-      length: 4
+      length: 100
   -
     name: jiu_wu
-    type: float
+    type: string
     option:
       default: 0
-      length: 4
+      length: 100
       notnull: false
   -
     name: chai_you
-    type: float
+    type: string
     option:
       default: 0
-      length: 4
+      length: 100
+      notnull: false
+  -
+    name: jiu_ba
+    type: string
+    option:
+      default: 0
+      length: 100
       notnull: false
   -
     name: longitude
     type: string
     comment: 经度
     option:
-      length: 12
+      length: 25
   -
     name: latitude
     type: string
     comment: 维度
     option:
-      length: 12
+      length: 25
   -
     name: start_time
     type: integer
@@ -85,7 +92,7 @@ columns:
           default : 0
 indexes:
   -
-    unique: true
+    unique: false
     columns:
       - longitude
       - latitude

@@ -26,27 +26,27 @@ columns:
     name: jiu_er
     type: string
     option:
-      length: 100
+      length: 500
   -
     name: jiu_wu
     type: string
     option:
       default: 0
-      length: 100
+      length: 500
       notnull: false
   -
     name: chai_you
     type: string
     option:
       default: 0
-      length: 100
+      length: 500
       notnull: false
   -
     name: jiu_ba
     type: string
     option:
       default: 0
-      length: 100
+      length: 500
       notnull: false
   -
     name: longitude

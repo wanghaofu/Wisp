@@ -17,9 +17,9 @@ columns:
     option :
        length: 20
   -
-    name: url
+    name: fileName
     type: string
-    comment: 文件路径 相对的
+    comment: 文件路径 相对的 包含部分路径
     option:
         notnull: false
   -

@@ -217,7 +217,8 @@ function generatorSchemaClasss( $schemaCon )
 function getTableName( $tableName, $cutPrefix = null )
 {
 //     $tableName = substr($string,)
-    $pattern = "/^(?:{$cutPrefix})([\w-_]*)/s";
+    $pattern = "/^(?:{$cutPrefix})([\w\-_]*)/s";
+    print($pattern);
     preg_match( $pattern, $tableName, $tm );
     if ( !empty( $tm[ 1 ] ) ) {
         $tableName = $tm[ 1 ];
